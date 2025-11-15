@@ -9,6 +9,8 @@ import (
 	"syscall"
 	"time"
 
+	"fl-observer/internal/kubeclient"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/swaggo/swag/example/basic/docs"
@@ -18,12 +20,14 @@ import (
 type application struct {
 	config config
 	logger *zap.SugaredLogger
+	kube   *kubeclient.Set
 }
 
 type config struct {
-	addr   string
-	apiURL string
-	env    string
+	addr       string
+	apiURL     string
+	env        string
+	kubeconfig string
 }
 
 type dbConfig struct {
